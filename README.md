@@ -20,15 +20,19 @@
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
 
 
-# Reallymakepkg (`reallymakepkg.js`)
+# Life NPM package (`ur-life`)
 
 [![NPM version](
-  https://img.shields.io/npm/last-update/reallymakepkg)](
-    https://npmjs.org/package/reallymakepkg)
+  https://img.shields.io/npm/last-update/ur-life)](
+    https://npmjs.org/package/ur-life)
 
-[`reallymakepkg](
-  https://github.com/themartiancompany/reallymakepkg)
+[`life`](
+  https://github.com/themartiancompany/life-ur)
 NPM package.
+
+[DogeOS](
+  https://github.com/themartiancompany)
+is a Life superset.
 
 ### Installation
 
@@ -39,27 +43,29 @@ with the following command:
 npm \
   install \
     --save \
-    reallymakepkg
+    ur-life
 ```
 
-You can then run the program with
+Running it with
 
 ```bash
 npx \
-  "reallymakepkg"
+  "life"
 ```
 
-or just with `reallymakepkg` if you install
+is currently unsupported.
+
+or just with `life` if you install
 the program system-wide using npm from this source
 repository or from the
 [NPM Registry](
-  https://www.npmjs.com/package/reallymakepkg)
+  https://www.npmjs.com/package/ur-life)
 
 ```
 npm \
   -g \
   install \
-    "reallymakepkg"
+    "ur-life"
 ```
 
 or if using GNU make in this repository
@@ -81,7 +87,7 @@ package from the
 
 ```bash
 ur \
-  reallymakepkg
+  life
 ```
 
 ### Documentation
