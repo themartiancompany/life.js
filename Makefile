@@ -27,9 +27,9 @@
 _NPM ?= false
 SHELL ?= bash
 PREFIX ?= /usr/local
-_PROGRAM=reallymakepkg
-_PROJECT_NPM=reallymakepkg
-_PROJECT=reallymakepkg.js
+_PROGRAM=life
+_PROJECT_NPM=ur-life
+_PROJECT=life.js
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
 USR_DIR=$(DESTDIR)$(PREFIX)

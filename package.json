@@ -1,10 +1,10 @@
 {
   "name":
-    "reallymakepkg",
+    "ur-life",
   "version":
     "0.0.0",
   "description":
-    "Fallback User Repository (fur).",
+    "Life operating system superset.",
   "funding": {
     "type":
       "patreon",
@@ -34,16 +34,16 @@
     "dogeos"
   ],
   "homepage":
-    "https://github.com/themartiancompany/reallymakepkg",
+    "https://github.com/themartiancompany/life-ur",
   "bugs": {
     "url":
-      "https://github.com/themartiancompany/reallymakepkg/issues"
+      "https://github.com/themartiancompany/life-ur/issues"
   },
   "repository": {
     "type":
       "git",
     "url":
-      "git+https://github.com/themartiancompany/reallymakepkg.js.git"
+      "git+https://github.com/themartiancompany/life.js.git"
   },
   "license":
     "AGPL-3.0-or-later",
