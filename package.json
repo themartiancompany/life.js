@@ -2,7 +2,7 @@
   "name":
     "fallback-user-repository",
   "version":
-    "0.0.0",
+    "0.0.1",
   "description":
     "Fallback User Repository (fur).",
   "funding": {
