@@ -4,7 +4,7 @@
   "version":
     "0.0.0",
   "description":
-    "Basic Javascript implementation of GNU Split.",
+    "Fallback User Repository (fur).",
   "funding": {
     "type":
       "patreon",
@@ -17,32 +17,33 @@
     "AUTHORS.rst",
     "COPYING",
     "README.md",
+    "bash",
     "dist",
     "eslint.config.mjs",
-    "package.json",
-    "tmcsplit",
     "fs-worker.webpack.config.cjs",
     "serve.json",
-    "libtmcsplit",
-    "libtmcsplit.webpack.config.cjs",
+    "libfur",
+    "libfur.webpack.config.cjs",
+    "package.json",
     "webpack.config.cjs"
   ],
   "keywords": [
     "ur",
+    "fur",
     "themartiancompany",
     "dogeos"
   ],
   "homepage":
-    "https://github.com/themartiancompany/tmcsplit",
+    "https://github.com/themartiancompany/fur",
   "bugs": {
     "url":
-      "https://github.com/themartiancompany/tmcsplit/issues"
+      "https://github.com/themartiancompany/fur/issues"
   },
   "repository": {
     "type":
       "git",
     "url":
-      "git+https://github.com/themartiancompany/tmcsplit.git"
+      "git+https://github.com/themartiancompany/fur.git"
   },
   "license":
     "AGPL-3.0-or-later",
