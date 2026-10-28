@@ -27,9 +27,9 @@
 _NPM ?= false
 SHELL ?= bash
 PREFIX ?= /usr/local
-_PROGRAM=split
-_PROJECT=tmc$(_PROGRAM)
-_PROJECT_NPM=@themartiancompany/$(_PROJECT)
+_PROGRAM=fur
+_PROJECT=$(_PROGRAM).js
+_PROJECT_NPM=$(_PROGRAM)
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
 USR_DIR=$(DESTDIR)$(PREFIX)
@@ -107,8 +107,8 @@ build-man:
 
 build-npm:
 
-	make \
-	  build-man
+	# make \
+	#   build-man
 	for _file in $(NPM_FILES); do \
 	  if [[ -d "$${_file}" ]]; then \
 	    mkdir \
