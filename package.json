@@ -1,8 +1,8 @@
 {
   "name":
-    "git-user-repository",
+    "reallymakepkg",
   "version":
-    "0.0.1",
+    "0.0.0",
   "description":
     "Fallback User Repository (fur).",
   "funding": {
