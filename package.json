@@ -72,21 +72,19 @@
   },
   "dependencies": {
     "libcrash-js":
-      "npm:crash-js@^1000000000000012.1000000000000001.1000000000000001",
-    "split-file":
-      "npm:@themartiancompany/split-file@2.3.21"
+      "npm:crash-js@^1000000000000013.1000000000000001.1000000000000001"
   },
   "overrides": {
     "split":
-      "./libtmcsplit"
+      "./fur"
   },
   "type":
     "module",
   "main":
-    "libtmcsplit",
+    "bash/fur",
   "bin":
-    { "tmcsplit":
-        "tmcsplit" },
+    { "fur":
+        "fur" },
   "scripts": {
     "build-fs-worker":
       "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && cp 'fs-worker.js' 'dist/libtmcsplit' && cp 'fs-worker.js' 'dist/tmcsplit'",

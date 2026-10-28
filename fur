@@ -1,0 +1,471 @@
+#!/usr/bin/env node
+
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+/**    -----------------------------------------------------------------
+ *     tmcsplit
+ *     -----------------------------------------------------------------
+ *     Copyright ©
+ *       Pellegrino Prevete
+ *         2024, 2025, 2026
+ * 
+ *     All rights reserved
+ *     -----------------------------------------------------------------
+ * 
+ *     This program is free software: you can redistribute it and/or
+ *     modify it under the terms of the GNU General Public License as
+ *     published by the Free Software Foundation, either version 3
+ *     of the License, or (at your option) any later version.
+ * 
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ * 
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.
+ *     If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/* eslint
+     no-unused-vars: [
+       "error",
+       { "vars":
+           "local",
+         "argsIgnorePattern":
+           "output_prefix" } ] */
+
+const
+  _libcrash =
+    await import(
+      'libcrash-js');
+/* global
+     _argv_url_get */
+const
+_argv_url_get =
+  _libcrash._argv_url_get;
+/* global
+     _cmdline_check */
+const
+  _cmdline_check =
+    _libcrash._cmdline_check;
+/* global
+     _echo */
+const
+  _echo =
+    _libcrash._echo;
+/* global
+     _exit */
+const
+  _exit =
+    _libcrash._exit;
+/* global
+     _get */
+const
+  _get =
+    _libcrash._get;
+/* global
+     _global_get */
+const
+  _global_get =
+    _libcrash._global_get;
+/* global
+     _msg_info */
+const
+  _msg_info =
+    _libcrash._msg_info;
+/* global
+     _msg_error */
+const
+_msg_error =
+  _libcrash._msg_error;
+/* global
+     _override_set */
+const
+  _override_set =
+    _libcrash._override_set;
+/* global
+     _require */
+const
+_require =
+  _libcrash._require;
+/* global
+     _set */
+const
+  _set =
+    _libcrash._set;
+/* global
+     _yargv_get */
+const
+_yargv_get =
+  _libcrash._yargv_get;
+const
+  _split_module =
+    await import(
+      "./libtmcsplit");
+/* global
+     _tmcsplit */
+const
+  _split =
+    _split_module._split;
+
+function
+  _global_variables() {
+  /* global
+       app_name:
+         writable */
+  _override_set(
+    "app",
+    "name",
+    "tmcsplit");
+  /* global
+       app_opts:
+         writable */
+  _override_set(
+    "app",
+    "opts",
+    []);
+  /* global
+       runtime_environment:
+         writable */
+  _override_set(
+    "runtime",
+    "environment",
+    "");
+  /* global
+       numeric_suffix:
+         writable */
+  _override_set(
+    "numeric",
+    "suffix",
+    "");
+  /* global
+       suffix_length:
+         writable */
+  _override_set(
+    "suffix",
+    "length",
+    "");
+  /* global
+       chunks_amount:
+         writable */
+  _override_set(
+    "chunks",
+    "amount",
+    "");
+  // string_length =
+  //   "";
+  /* global
+       size_max:
+         writable */
+  _override_set(
+    "size",
+    "max",
+    "");
+  /* global
+       input_file:
+         writable */
+  _override_set(
+    "input",
+    "file",
+    "");
+  /* global
+       output_prefix:
+         writable */
+  _override_set(
+    "output",
+    "prefix",
+    "");
+  /* global
+       quiet:
+         writable */
+  const
+    _global =
+      _global_get();
+  _global[
+    "quiet"] =
+    "";
+  /* global
+       verbose:
+         writable */
+  _global[
+    "verbose"] =
+    "";
+}
+
+function 
+  _overrides_set() {
+  const
+    _input_file =
+      _get(
+        "input",
+        "file");
+  _override_set(
+    "suffix",
+    "length",
+    "base64");
+  _override_set(
+    "output",
+    "prefix",
+    _input_file);
+}
+
+function
+  _config_show() {
+  let
+    _line;
+  const
+    _text = [
+      `${app_name} configuration:`,
+      `      Runtime environment:   ${runtime_environment}`,
+      `            Suffix length:   ${suffix_length}`,
+      `       Maximum chunk size:   ${size_max} bytes`,
+      `         Amount of chunks:   ${chunks_amount}`,
+      `                  In file:   ${input_file}`,
+      `         Out files prefix:   ${output_prefix}`,
+    ];
+  for ( _line of _text ) {
+    _msg_info(
+      _line);
+  }
+}
+
+function
+  _usage(
+    _exit_code) {
+  let
+    _line;
+  const
+    _text = [
+      "Output pieces of FILE to PREFIXaa, PREFIXab, ...",
+      "default size is 1000 lines, and default PREFIX is 'x'.",
+      "",
+      "Usage:",
+      "",
+      "  tmcsplit",
+      "    <in-file>",
+      "    <out-txt-prefix>",
+      "",
+      "  arguments:",
+      "    <in-file>                      An input file.",
+      "    <out-file-prefix>              Prefix for the output",
+      "                                   file(s).",
+      "",
+      "  options:",
+      "",
+      "     -a, --suffix-length=N         Generate suffixes of",
+      "                                   length N.",
+      `                                   Default: '${suffix_length}'`,
+      "     --additional-suffix=SUFFIX    append an additional SUFFIX",
+      "                                   to file names.",
+      "     -b, --bytes=SIZE              Put SIZE bytes per output",
+      "                                   file.",
+      "     -C, --line-bytes=SIZE         Put at most SIZE bytes of",
+      "                                   records per output file.",
+      "     -d                            Use numeric suffixes",
+      "                                   starting at 0, not",
+      "                                   alphabetic.",
+      "     --numeric-suffixes[=FROM]     Same as -d, but allow",
+      "                                   setting the start value.",
+      "     -l, --lines=NUMBER            Put NUMBER lines/records",
+      "                                   per output file.",
+      "     -n, --number=CHUNKS           Generate CHUNKS output",
+      "                                   files; see explanation",
+      "                                   below",
+      "     -t, --separator=SEP           Use SEP instead of newline",
+      "                                   as the record separator;",
+      "                                   '\0' (zero) specifies the",
+      "                                   NUL character.",
+      "",
+      "     -h --help                     This message.",
+      "     -v --verbose                  Enable verbose output.",
+      "",
+      "The SIZE argument is an integer and optional",
+      "unit (example: 10K is 10*1024).",
+      "Units are K,M,G,T,P,E,Z,Y,R,Q (powers of 1024)",
+      "or KB,MB,... (powers of 1000).",
+      "Binary prefixes can be used, too: KiB=K, MiB=M, and so on.",
+      "",
+      "CHUNKS may be:",
+      "  N       split into N files based on size of input",
+      "  K/N     output Kth of N to standard output",
+      "  l/N     split into N files without splitting lines/records",
+      "  l/K/N   output Kth of N to standard output without",
+      "          splitting lines/records",
+    ];
+  for ( _line of _text ) {
+    _echo(
+      _line);
+  }
+  _exit(
+    _exit_code);
+}
+
+function
+  _cmdline_parse_help(
+    _argv) {
+  const
+    _help_display =
+      _argv[
+        "help"] ||
+      _argv[
+        "h"];
+  if ( _help_display ) {
+    quiet =
+      "n";
+    _usage(
+      0);
+  }
+}
+
+function
+  _input_args_check(
+    _argv) {
+  if ( _argv[
+         "_"].length < 1 ) {
+    const
+      _msg =
+        "Input file argument required.";
+    _msg_error(
+      _msg,
+      0);
+    _usage(
+      1);
+  }
+}
+
+async function 
+  _cmdline_parse() {
+  const
+    _argv =
+      await _yargv_get();
+  quiet = 
+    "y";
+  _set(
+    "runtime",
+    "environment",
+    "node");
+  _cmdline_parse_help(
+    _argv);
+  _input_args_check(
+    _argv);
+  _set(
+    "input",
+    "file",
+    _argv[
+      "_"][
+        0]);
+  if ( _argv[
+         "_"].length < 2 ) {
+    _set(
+      "output",
+      "prefix",
+      _get(
+        "input",
+        "file"));
+  }
+  if ( "a" in _argv ) {
+    _set(
+      "suffix",
+      "length",
+      _argv[
+        "a"]);
+  }
+  if ( "suffix-length" in _argv ) {
+    _set(
+      "suffix",
+      "length",
+      _argv[
+        "suffix-length"]);
+  }
+  if ( "suffix-length" in _argv ) {
+    _set(
+      "suffix",
+      "length",
+      _argv[
+        "suffix-length"]);
+  }
+  if ( "d" in _argv ) {
+    _set(
+      "numeric",
+      "suffix",
+      true);
+  }
+  _set(
+    "chunks",
+    "amount",
+    _argv[
+      "chunks-amount"] ||
+    _argv[
+      "n"]);
+  _set(
+    "chunks",
+    "amount",
+    _argv[
+      "size-max"] ||
+    _argv[
+      "b"]);
+  const
+    _global =
+      _global_get();
+  _global[
+    "verbose"] =
+    _argv[
+      "verbose"] ||
+    _argv[
+      "v"];
+  if ( _global[
+         "verbose"] ) {
+    _global[
+      "quiet"] =
+      "n";
+  }
+}
+
+function
+  _url_parse() {
+  const
+    _argv =
+      _argv_url_get();
+  runtime_environment =
+    "browser";
+  input_file =
+    _argv[
+      "input_file"][
+        0];
+  output_prefix =
+    _argv_url_get[
+      "output_prefix"][
+        0];
+  chunks_amount =
+    _argv_url_get[
+      "chunks_amount"][
+        0];
+  quiet =
+    _argv_url_get[
+      "quiet"];
+  if ( quiet.length === 0 ) {
+    quiet =
+      "n";
+  }
+}
+
+_global_variables();
+_overrides_set();
+if ( _cmdline_check(
+       "tmcsplit") ) {
+  await _cmdline_parse();
+}
+else {
+  _url_parse();
+}
+_config_show();
+app_opts = [
+  input_file,
+  output_prefix,
+  chunks_amount,
+  size_max
+];
+_split.apply(
+  null,
+  app_opts);
