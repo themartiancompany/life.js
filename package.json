@@ -34,16 +34,16 @@
     "dogeos"
   ],
   "homepage":
-    "https://github.com/themartiancompany/fur",
+    "https://github.com/themartiancompany/reallymakepkg",
   "bugs": {
     "url":
-      "https://github.com/themartiancompany/fur/issues"
+      "https://github.com/themartiancompany/reallymakepkg/issues"
   },
   "repository": {
     "type":
       "git",
     "url":
-      "git+https://github.com/themartiancompany/fur.git"
+      "git+https://github.com/themartiancompany/reallymakepkg.js.git"
   },
   "license":
     "AGPL-3.0-or-later",
