@@ -20,24 +20,15 @@
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
 
 
-# The Martian Company's Split (`tmcsplit`)
+# Reallymakepkg (`reallymakepkg.js`)
 
 [![NPM version](
-  https://img.shields.io/npm/last-update/tmcsplit)](
-    https://npmjs.org/package/tmcsplit)
+  https://img.shields.io/npm/last-update/reallymakepkg)](
+    https://npmjs.org/package/reallymakepkg)
 
-Javascript GNU Split rewrite.
-
-Splittable with number of parts or maximum bytes per part.
-
-It works both in Node.js and in web browsers
-using the
-[Crash Javacript](
-  https://github.com/themartiancompany/crash-js)
-and
-[Split File](
-  https://github.com/themartiancompany/node-split-file)
-modules.
+[`reallymakepkg](
+  https://github.com/themartiancompany/reallymakepkg)
+NPM package.
 
 ### Installation
 
@@ -48,27 +39,27 @@ with the following command:
 npm \
   install \
     --save \
-    @themartiancompany/tmcsplit
+    reallymakepkg
 ```
 
 You can then run the program with
 
 ```bash
 npx \
-  "tmcsplit"
+  "reallymakepkg"
 ```
 
-or just with `tmcsplit` if you install
+or just with `reallymakepkg` if you install
 the program system-wide using npm from this source
 repository or from the
 [NPM Registry](
-  https://www.npmjs.com/package/tmcsplit)
+  https://www.npmjs.com/package/reallymakepkg)
 
 ```
 npm \
   -g \
   install \
-    "split-file"
+    "reallymakepkg"
 ```
 
 or if using GNU make in this repository
@@ -90,14 +81,14 @@ package from the
 
 ```bash
 ur \
-  tmcsplit
+  reallymakepkg
 ```
 
 ### Documentation
 
 Upon installation the manual can be accessed with
-`man tmcsplit` but really it's the same as
-GNU Split, so you can also refer to `man split`
+`man reallymakepkg` but really it's the same as
+GNU Split, so you can also refer to `man reallymakepkg`
 for what is it implemented.
 
 # License
