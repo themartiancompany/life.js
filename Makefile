@@ -28,7 +28,7 @@ _NPM ?= false
 SHELL ?= bash
 PREFIX ?= /usr/local
 _PROGRAM=fur
-_PROJECT_NPM=fallback-user-repository
+_PROJECT_NPM=fur.js
 _PROJECT=$(_PROJECT_NPM)
 _NAMESPACE=themartiancompany
 DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
@@ -150,7 +150,7 @@ build-npm:
 	npm \
 	  pack; \
 	mv \
-	  "$(_PROJECT)-$${_version}.tgz" \
+	  "$(_PROJECT_NPM)-$${_version}.tgz" \
 	  ".."
 
 build-webpack:
